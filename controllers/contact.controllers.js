@@ -1,0 +1,20 @@
+exports.postContact = async (req,res)=>{
+    try {
+    
+    const newContact=new Contact({...req.body});
+    if (!req.body.email){
+        res.status(400).send({message:"Email is required check again"});
+        return;
+    }
+    const user= await Contact.findOne({email: req.body.email});
+    if (user) {
+        res.status(400).send({message:"User already exists"});
+        return;
+    }
+       const response= await newContact.save();
+       res.send({response:response,message:"User is saved"});
+    } catch (error) {
+        console.log(error);
+       res.status(500).send({message:"can not save it"}); 
+    } 
+    };
