@@ -7,7 +7,7 @@ dbConnect();
 //create route
 //middlecare routing body parser
 app.use(express.json());
-app.use("/api/contact", require("./routes/contacts"));
+app.use("api/contact", require("./routes/contacts"));
 
 
 
